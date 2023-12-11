@@ -1,0 +1,29 @@
+ <!-- records options -->
+
+
+
+<!----- INCLUDE HEADER- ----->
+<%- include('include/_header') %>
+<!---- //INCLUDE HEADER ----->
+
+    <!----- MAIN SITE ----->
+    <main id="site-main">
+        <div class="container">
+            <!------ FORM HANDLING ------>
+            <form action="/api/users-find" method="post" id="index">
+                <table>
+                    <tbody>
+                        <%- include('include/_showSearchData')%>
+                    </tbody>
+                </table>
+            </form>
+            <!----- //FORM HANDLING ----->
+        </div>
+    </main>
+    <!---- //MAIN SITE ---->
+
+    
+<!----- INCLUDE FOOTER- ----->
+<%- include('include/_footer') %>
+<!---- //INCLUDE FOOTER ----->
+

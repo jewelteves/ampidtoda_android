@@ -1,0 +1,35 @@
+<!-- membership -->
+
+<!----- INCLUDE HEADER- ----->
+<%- include('include/_header') %>
+<!---- //INCLUDE HEADER ----->
+
+    <!----- MAIN SITE ----->
+    <main id="site-main">
+        <div class="container">
+            <!------ FORM HANDLING ------>
+            <form action="/api/users-membership" method="post">
+                <table>
+                    <thead class="thead-dark">
+                        <tr>                           
+                            <th>BODY NO</th>
+                            <th>FULLNAME</th>
+                            <th>AMOUNT</th>
+                            <th>DATE OF PAYMENT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%- include('include/_showMembership')%>
+                    </tbody>
+                </table>
+            </form>
+            <!----- //FORM HANDLING ----->
+        </div>
+    </main>
+    <!---- //MAIN SITE ---->
+
+    
+<!----- INCLUDE FOOTER- ----->
+<%- include('include/_footer') %>
+<!---- //INCLUDE FOOTER ----->
+
