@@ -11,15 +11,18 @@ exports.create = async (req, res) => {
     try {
         const { bodyno, fullname, address, contactno, password } = req.body;
 
-        // Check for empty fields
-        if (!bodyno || !fullname || !address || !contactno || !password) {
-            res.json({success: false, message: 'Please fill-up required feilds'})
+        // Check for empty or null fields
+        if (!bodyno || !fullname || !address || !contactno || !password ||
+            bodyno === null || fullname === null || address === null || contactno === null || password === null) {
+            res.json({ success: false, message: 'Please fill-up required fields' });
+            return; // Return to exit the function
         }
 
         // Check if the user already exists
         const existingUser = await Driver.findOne({ bodyno });
         if (existingUser) {
-            res.json({success: false, message: 'User already exist'})
+            res.json({ success: false, message: 'User already exists' });
+            return; // Return to exit the function
         }
 
         const driver = new Driver({
@@ -32,9 +35,9 @@ exports.create = async (req, res) => {
 
         // Save the new driver
         const data = await driver.save();
-        res.json({success: true, message: 'Registered Successfully'})
+        res.json({ success: true, message: 'Registered Successfully' });
     } catch (err) {
-        res.json({success: false, message: 'Error occured while registering, Please try again later'})
+        res.json({ success: false, message: 'Error occurred while registering. Please try again later' });
     }
 };
 
