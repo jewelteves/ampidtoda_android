@@ -43,7 +43,8 @@ $(document).ready(function () {
                 // Check the response from the server
                 if (response.success) {
                     // Redirect to another page upon successful login
-                    window.location.href = '/'; // Change the URL accordingly
+                    window.location.href = '/'; 
+                    alert(response.message);
                 } else {
                     // Display an alert for other messages
                     alert(response.message);
