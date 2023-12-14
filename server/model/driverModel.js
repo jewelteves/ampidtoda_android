@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-    bodyno: {type: Number, require: true},
+    bodyno: {type: String, require: true},
     fullname: {type: String, require: true},
     address: {type: String, require: true},
-    gcashno: {type: Number, require: true},
+    gcashno: {type: String, require: true},
     gcashname: {type: String, require: true},
-    contactno: {type: Number, require: true},
+    contactno: {type: String, require: true},
     password: {type: String, require: true},
 })
 const Crudapi = mongoose.model('driver', schema);
