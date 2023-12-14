@@ -1,4 +1,4 @@
-  <!-- terminal fees -->
+<!-- terminalfeess -->
 
 <% for(var i = 0; i < users.length; i++){ %>
     <tr>
@@ -7,9 +7,29 @@
         <td><%= users[i].terminalfees %></td>
         <td><%= users[i].dateofpayment %></td> 
     </tr>
-    
-    <% } %>
+<% } %>
 
-    <a href="/records-user">
-        <span class="text-gradient">BACK</span>
-    </a>
+<!-- Move the link outside of the loop -->
+<a href="/records-user" class="back-link">
+    <span class="text-gradient">BACK</span>
+</a>
+
+
+<style>
+    /* Style for the "BACK" link */
+    .back-link {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        text-decoration: none;
+        padding: 10px;
+        background-color: #06d6a0;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+    /* Additional styling for the link if needed */
+    .back-link:hover {
+        background-color: #04856b;
+    }
+</style>
