@@ -9,35 +9,34 @@ var Membership = require('../model/membershipfeesModel')
 // REGISTER NEW USER
 exports.create = async (req, res) => {
     try {
-        const { bodyno, fullname, address, contactno, password } = req.body;
+        const { bodyno, fullname, address, gcashno, gcashname, contactno, password } = req.body;
 
-        // Check for empty or null fields
-        if (!bodyno || !fullname || !address || !contactno || !password ||
-            bodyno === null || fullname === null || address === null || contactno === null || password === null) {
-            res.json({ success: false, message: 'Please fill-up required fields' });
-            return; // Return to exit the function
+        // Check for empty fields
+        if (!bodyno || !fullname || !address || !gcashno || !gcashname || !contactno || !password ) {
+            res.json({success: false, message: 'Please fill-up required feilds'})
         }
 
         // Check if the user already exists
         const existingUser = await Driver.findOne({ bodyno });
         if (existingUser) {
-            res.json({ success: false, message: 'User already exists' });
-            return; // Return to exit the function
+            res.json({success: false, message: 'User already exist'})
         }
 
         const driver = new Driver({
             bodyno,
             fullname,
             address,
+            gcashno,
+            gcashname,
             contactno,
             password,
         });
 
         // Save the new driver
         const data = await driver.save();
-        res.json({ success: true, message: 'Registered Successfully' });
+        res.json({success: true, message: 'Registered Successfully'})
     } catch (err) {
-        res.json({ success: false, message: 'Error occurred while registering. Please try again later' });
+        res.json({success: false, message: 'Error occured while registering, Please try again later'})
     }
 };
 
@@ -76,6 +75,32 @@ exports.records = (req, res)=>{
 
 
 // TERMINAL, BOUNDARIES, MEMBERSHIP FEES
+// exports.boundaries = (req, res) => {
+//     const { bodyno } = req.query;
+
+//     if (bodyno) {
+//         Boundaries.findOne({ bodyno })
+//             .then(data => {
+//                 if (!data) {
+//                     res.status(404).send({ message: 'Cannot find a user' });
+//                 } else {
+//                     res.send(data);
+//                 }
+//             })
+//             .catch(err => {
+//                 res.status(500).send({ message: 'Error retrieving data user' });
+//             });
+//     } else {
+//         Boundaries.find()
+//             .then(driver => {
+//                 res.send(driver);
+//             })
+//             .catch(err => {
+//                 res.status(500).send({ message: err.message || 'Error occurred while retrieving user information' });
+//             });
+//     }
+// };
+
 exports.boundaries = (req, res) => {
     const { bodyno } = req.query;
 
@@ -83,26 +108,26 @@ exports.boundaries = (req, res) => {
         Boundaries.findOne({ bodyno })
             .then(data => {
                 if (!data) {
-                    res.status(404).send({ message: 'Cannot find a user' });
+                    res.json({ message: 'Cannot find a user' });
                 } else {
-                    res.send(data);
+                    res.send([data]); // Wrap the result in an array for consistency
                 }
             })
             .catch(err => {
-                res.status(500).send({ message: 'Error retrieving data user' });
+                res.json({ message: 'Error retrieving user data' });
             });
     } else {
+        // If no bodyno is provided, return all data
         Boundaries.find()
-            .then(driver => {
-                res.send(driver);
+            .then(users => {
+                res.send(users);
             })
             .catch(err => {
-                res.status(500).send({ message: err.message || 'Error occurred while retrieving user information' });
+                res.json({ message: err.message || 'Error occurred while retrieving user information' });
             });
     }
 };
 
-        
 
         exports.terminal = (req, res)=>{
 
